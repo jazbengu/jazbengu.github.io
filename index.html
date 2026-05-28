@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jazbengu // Mission Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#CC0000;--green:#39FF14;--bg:#080808;--panel:#111;--card:#181818;--border:rgba(255,255,255,0.06);--muted:#666;--txt:#fff}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2.5rem;background:rgba(8,8,8,.95);border-bottom:1px solid rgba(204,0,0,.2);backdrop-filter:blur(16px)}
+.logo{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:900;letter-spacing:3px;color:var(--red)}
+.logo em{color:var(--green);font-style:normal}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-stat{display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--green);font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+.dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s ease infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding:6rem 2rem 3rem}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(204,0,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(204,0,0,.05) 1px,transparent 1px);background-size:60px 60px;animation:gridmove 25s linear infinite}
+@keyframes gridmove{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+.scanline{position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(57,255,20,.12),transparent);animation:scan 5s linear infinite}
+@keyframes scan{0%{top:0}100%{top:100%}}
+.corner{position:absolute;width:40px;height:40px;border-color:var(--red);border-style:solid;opacity:.3}
+.corner.tl{top:80px;left:30px;border-width:2px 0 0 2px}
+.corner.tr{top:80px;right:30px;border-width:2px 2px 0 0}
+.corner.bl{bottom:30px;left:30px;border-width:0 0 2px 2px}
+.corner.br{bottom:30px;right:30px;border-width:0 2px 2px 0}
+
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(57,255,20,.3);border-radius:20px;padding:.3rem 1.25rem;font-size:.68rem;color:var(--green);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.75rem;position:relative;z-index:1;font-family:'JetBrains Mono',monospace}
+h1.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2.8rem,9vw,6rem);font-weight:900;letter-spacing:5px;text-transform:uppercase;line-height:1.05;position:relative;z-index:1}
+h1.hero-name .r{color:var(--red)}
+.sitch{font-size:.85rem;color:var(--muted);margin:1rem 0 .4rem;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1;font-family:'JetBrains Mono',monospace}
+.sitch em{color:var(--green);font-style:normal}
+.typer-wrap{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--green);min-height:1.7em;position:relative;z-index:1;margin-bottom:2.5rem}
+.cursor{display:inline-block;width:2px;height:1em;background:var(--green);margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+.btn-r{background:var(--red);color:#fff;padding:.75rem 2rem;border:none;border-radius:4px;font-size:.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-r:hover{background:#e00;transform:translateY(-2px);box-shadow:0 8px 24px rgba(204,0,0,.4)}
+.btn-g{background:transparent;color:var(--green);padding:.75rem 2rem;border:1px solid rgba(57,255,20,.5);border-radius:4px;font-size:.78rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-g:hover{background:rgba(57,255,20,.07);transform:translateY(-2px)}
+
+/* SECTIONS */
+.sw{padding:5rem 2.5rem;max-width:1100px;margin:0 auto}
+.sh{display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
+.stag{font-size:.62rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.stitle{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;white-space:nowrap}
+.sline{flex:1;height:1px;background:linear-gradient(90deg,rgba(204,0,0,.4),transparent);min-width:10px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center}
+.stat-n{display:block;font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;color:var(--red)}
+.stat-l{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:.25rem;font-family:'JetBrains Mono',monospace}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:240px 1fr;gap:3rem;align-items:start}
+.av-box{background:var(--card);border:2px solid var(--red);border-radius:10px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+#av-img{width:100%;height:100%;object-fit:cover;display:none}
+#av-init{font-family:'Orbitron',monospace;font-size:3.5rem;font-weight:900;color:var(--red);line-height:1}
+.av-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--green);letter-spacing:2px;margin-top:.5rem;position:absolute;bottom:12px}
+.bio-name{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.bio-handle{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--green);margin-bottom:1.25rem}
+.bio-p{color:var(--muted);line-height:1.85;font-size:.9rem;margin-bottom:.75rem}
+.bio-meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.bio-badge{background:rgba(204,0,0,.08);border:1px solid rgba(204,0,0,.2);color:#e88;font-size:.68rem;padding:.25rem .75rem;border-radius:4px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px}
+
+/* MISSIONS */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.25rem}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;transition:all .25s;text-decoration:none;color:inherit;display:block}
+.mc::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .3s}
+.mc:hover{border-color:rgba(204,0,0,.3);transform:translateY(-3px)}
+.mc:hover::after{transform:scaleY(1)}
+.mid{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--red);letter-spacing:2px;margin-bottom:.5rem;text-transform:uppercase}
+.mname{font-size:1rem;font-weight:600;margin-bottom:.5rem;color:#fff;word-break:break-word}
+.mdesc{font-size:.8rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;min-height:2.6em}
+.mtags{display:flex;flex-wrap:wrap;gap:.35rem}
+.mtag{background:rgba(57,255,20,.07);color:var(--green);font-size:.62rem;padding:.2rem .55rem;border-radius:3px;font-family:'JetBrains Mono',monospace}
+.mfoot{display:flex;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted);align-items:center}
+.mlang{margin-left:auto;display:flex;align-items:center;gap:.35rem;font-family:'JetBrains Mono',monospace;font-size:.68rem}
+.ldot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* SKILLS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.9rem}
+.skcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center;transition:all .2s;cursor:default}
+.skcard:hover{border-color:rgba(204,0,0,.3);background:rgba(204,0,0,.04)}
+.skico{font-size:1.7rem;margin-bottom:.45rem;line-height:1}
+.skn{font-size:.8rem;font-weight:600;letter-spacing:.5px}
+.skcat{font-size:.6rem;color:var(--green);font-family:'JetBrains Mono',monospace;margin-top:.2rem;letter-spacing:1px}
+
+/* CONTACT */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.kimcom{background:var(--card);border:2px solid rgba(57,255,20,.4);border-radius:12px;padding:2rem 2rem 2.5rem;text-align:center;position:relative}
+.kimcom::before{content:'● KIMMUNICATOR ONLINE';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--card);padding:0 8px;font-size:.58rem;color:var(--green);letter-spacing:2px;white-space:nowrap;font-family:'JetBrains Mono',monospace}
+.kico{font-size:2.8rem;margin-bottom:1rem;animation:spin 8s linear infinite}
+@keyframes spin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(3deg) scale(1.03)}100%{transform:rotate(0deg) scale(1)}}
+.ktitle{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:700;letter-spacing:2px;margin-bottom:.5rem}
+.ksub{font-size:.82rem;color:var(--muted);line-height:1.7}
+.kpulse{width:10px;height:10px;background:var(--green);border-radius:50%;margin:1.25rem auto 0;animation:kp 1.8s ease infinite}
+@keyframes kp{0%,100%{box-shadow:0 0 0 0 rgba(57,255,20,.5)}70%{box-shadow:0 0 0 10px rgba(57,255,20,0)}}
+
+.clinks{display:flex;flex-direction:column;gap:.75rem}
+.clink{display:flex;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1rem 1.25rem;text-decoration:none;color:inherit;transition:all .2s}
+.clink:hover{border-color:rgba(204,0,0,.3);background:rgba(204,0,0,.04);transform:translateX(3px)}
+.cico{font-size:1.1rem;width:22px;text-align:center;flex-shrink:0}
+.clabel{font-size:.62rem;color:var(--muted);display:block;font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:1px}
+.cval{font-size:.88rem;font-weight:500}
+
+/* FOOTER */
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.76rem;letter-spacing:1px;font-family:'JetBrains Mono',monospace}
+footer .r{color:var(--red)}
+footer a{color:var(--green);text-decoration:none}
+
+/* ANIMATIONS */
+.fi{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+/* MISSION ALERT */
+.mission-alert{background:rgba(204,0,0,.08);border:1px solid rgba(204,0,0,.2);border-left:3px solid var(--red);padding:.75rem 1.25rem;border-radius:0 4px 4px 0;font-size:.8rem;color:var(--muted);margin-bottom:2rem;font-family:'JetBrains Mono',monospace;display:none}
+.mission-alert.show{display:block}
+
+@media(max-width:700px){
+  .about-grid{grid-template-columns:1fr}
+  .av-box{max-width:160px;margin:0 auto}
+  .cgrid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">KP<em>//</em>JAZBENGU</div>
+  <ul class="nav-links">
+    <li><a href="#about">Agent</a></li>
+    <li><a href="#missions">Missions</a></li>
+    <li><a href="#skills">Gadgets</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-stat"><div class="dot"></div>SYSTEMS ONLINE</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="scanline"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="hero-badge"><div class="dot"></div>MISSION PORTFOLIO // ACTIVE</div>
+  <h1 class="hero-name"><span class="r">JAZ</span>BENGU</h1>
+  <p class="sitch">// <em>WHAT'S THE SITCH?</em></p>
+  <div class="typer-wrap" id="typer"><span class="cursor"></span></div>
+  <div class="hero-btns">
+    <a href="https://github.com/jazbengu" target="_blank" class="btn-r">↗ GitHub Profile</a>
+    <a href="#missions" class="btn-g">▶ View Missions</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="sw" id="about">
+  <div class="sh fi">
+    <span class="stag">// MISSION FILE</span>
+    <h2 class="stitle">Agent Profile</h2>
+    <div class="sline"></div>
+  </div>
+  <div class="stats-row fi" id="stats-row">
+    <div class="stat"><span class="stat-n" id="s-repos">—</span><div class="stat-l">Repositories</div></div>
+    <div class="stat"><span class="stat-n" id="s-followers">—</span><div class="stat-l">Followers</div></div>
+    <div class="stat"><span class="stat-n" id="s-following">—</span><div class="stat-l">Following</div></div>
+  </div>
+  <div class="about-grid fi">
+    <div class="av-box">
+      <img id="av-img" alt="jazbengu">
+      <div id="av-init">JB</div>
+      <div class="av-tag">AGENT // JAZBENGU</div>
+    </div>
+    <div>
+      <div class="bio-name" id="b-name">Jazbengu</div>
+      <div class="bio-handle">@jazbengu on GitHub</div>
+      <p class="bio-p" id="b-bio">Loading mission file…</p>
+      <div class="bio-meta" id="b-meta">
+        <span class="bio-badge" id="b-loc" style="display:none"></span>
+        <span class="bio-badge" id="b-blog" style="display:none"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSIONS -->
+<div class="sw" id="missions">
+  <div class="sh fi">
+    <span class="stag">// ACTIVE MISSIONS</span>
+    <h2 class="stitle">Projects</h2>
+    <div class="sline"></div>
+  </div>
+  <div class="mission-alert" id="m-alert"></div>
+  <div class="mgrid" id="mgrid">
+    <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:2px">
+      DECRYPTING MISSION FILES
+      <span style="display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle">
+        <span class="dot"></span><span class="dot" style="animation-delay:.2s"></span><span class="dot" style="animation-delay:.4s"></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="sw" id="skills">
+  <div class="sh fi">
+    <span class="stag">// GADGET BELT</span>
+    <h2 class="stitle">Tech Stack</h2>
+    <div class="sline"></div>
+  </div>
+  <div class="sgrid fi" id="sgrid">
+    <div class="skcard"><div class="skico">⚡</div><div class="skn">JavaScript</div><div class="skcat">LANG</div></div>
+    <div class="skcard"><div class="skico">🐍</div><div class="skn">Python</div><div class="skcat">LANG</div></div>
+    <div class="skcard"><div class="skico">⚛️</div><div class="skn">React</div><div class="skcat">FRAMEWORK</div></div>
+    <div class="skcard"><div class="skico">🟢</div><div class="skn">Node.js</div><div class="skcat">RUNTIME</div></div>
+    <div class="skcard"><div class="skico">🗄️</div><div class="skn">SQL</div><div class="skcat">DATABASE</div></div>
+    <div class="skcard"><div class="skico">🐙</div><div class="skn">Git</div><div class="skcat">TOOLS</div></div>
+    <div class="skcard"><div class="skico">🐋</div><div class="skn">Docker</div><div class="skcat">DEVOPS</div></div>
+    <div class="skcard"><div class="skico">☁️</div><div class="skn">Cloud</div><div class="skcat">INFRA</div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sw" id="contact">
+  <div class="sh fi">
+    <span class="stag">// ESTABLISH COMMS</span>
+    <h2 class="stitle">Contact</h2>
+    <div class="sline"></div>
+  </div>
+  <div class="cgrid fi">
+    <div class="kimcom">
+      <div class="kico">📡</div>
+      <div class="ktitle">OPEN COMMS</div>
+      <p class="ksub">Ready for new missions. Whether it's a collab, project, or just a sitch — I'm all ears.</p>
+      <div class="kpulse"></div>
+    </div>
+    <div class="clinks">
+      <a href="https://github.com/jazbengu" target="_blank" class="clink">
+        <span class="cico">🐙</span>
+        <div><span class="clabel">GITHUB</span><span class="cval">github.com/jazbengu</span></div>
+      </a>
+      <div class="clink" id="cl-loc" style="display:none">
+        <span class="cico">📍</span>
+        <div><span class="clabel">LOCATION</span><span class="cval" id="cl-loc-v">—</span></div>
+      </div>
+      <div class="clink" id="cl-blog" style="display:none">
+        <span class="cico">🔗</span>
+        <div><span class="clabel">WEBSITE</span><span class="cval" id="cl-blog-v">—</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Engineered by <span class="r">jazbengu</span> &nbsp;·&nbsp;
+  Inspired by <span class="r">Kim Possible</span> &nbsp;·&nbsp;
+  <a href="https://github.com/jazbengu" target="_blank">github.com/jazbengu</a>
+  &nbsp;·&nbsp; "CALL ME, BEEP ME"
+</footer>
+
+<script>
+const ROLES = ["Full-Stack Developer","Problem Solver","Open Source Contributor","Mission: Possible","Code Ninja"];
+const LANG_COLORS = {JavaScript:'#f7df1e',Python:'#3572a5',TypeScript:'#3178c6',HTML:'#e34c26',CSS:'#563d7c',Java:'#b07219','C#':'#178600','C++':'#f34b7d',Go:'#00add8',Rust:'#dea584',Ruby:'#701516',PHP:'#4f5d95',Shell:'#89e051',Kotlin:'#a97bff',Swift:'#fa7343',Dart:'#00b4ab',R:'#198ce7',Vue:'#41b883'};
+const LANG_ICO = {JavaScript:'⚡',Python:'🐍',TypeScript:'🔷',Java:'☕','C#':'💠','C++':'⚙️',Go:'🐹',Rust:'🦀',Kotlin:'🎯',Swift:'🍎',PHP:'🐘',Ruby:'💎',HTML:'🌐',CSS:'🎨',Shell:'💻',Dart:'🎯',Vue:'🫛',R:'📊'};
+
+// Typewriter
+let ri=0,ci=0,del=false;
+const typerEl=document.getElementById('typer');
+function type(){
+  const r=ROLES[ri],txt=del?r.slice(0,ci--):r.slice(0,ci++);
+  typerEl.innerHTML=txt+'<span class="cursor"></span>';
+  let spd=del?38:82;
+  if(!del&&ci>r.length){del=true;spd=1800}
+  else if(del&&ci<0){del=false;ri=(ri+1)%ROLES.length;ci=0;spd=300}
+  setTimeout(type,spd);
+}
+type();
+
+// Scroll fade-in
+function observe(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*90);obs.unobserve(e.target)}});
+  },{threshold:.1});
+  document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+}
+observe();
+
+// Counter animation
+function counter(el,n){
+  const dur=1000,t0=Date.now();
+  const u=()=>{
+    const p=Math.min((Date.now()-t0)/dur,1);
+    el.textContent=Math.floor(p*n);
+    if(p<1)requestAnimationFrame(u);else el.textContent=n;
+  };
+  requestAnimationFrame(u);
+}
+const so=new IntersectionObserver(entries=>{
+  if(!entries[0].isIntersecting)return;
+  const r=document.getElementById('s-repos'),f=document.getElementById('s-followers'),fo=document.getElementById('s-following');
+  if(r.textContent!=='—'){counter(r,+r.textContent);counter(f,+f.textContent);counter(fo,+fo.textContent)}
+  so.disconnect();
+},{threshold:.5});
+so.observe(document.getElementById('stats-row'));
+
+// GitHub
+async function loadGH(){
+  try{
+    const [pr,rr]=await Promise.all([
+      fetch('https://api.github.com/users/jazbengu'),
+      fetch('https://api.github.com/users/jazbengu/repos?sort=updated&per_page=9&type=owner')
+    ]);
+    const p=await pr.json(),repos=await rr.json();
+
+    // Profile stats
+    document.getElementById('s-repos').textContent=p.public_repos||0;
+    document.getElementById('s-followers').textContent=p.followers||0;
+    document.getElementById('s-following').textContent=p.following||0;
+
+    // Bio
+    document.getElementById('b-name').textContent=p.name||'jazbengu';
+    document.getElementById('b-bio').textContent=p.bio||'Developer on a mission. Building awesome things on GitHub.';
+    if(p.location){const el=document.getElementById('b-loc');el.textContent='📍 '+p.location;el.style.display='';document.getElementById('cl-loc-v').textContent=p.location;document.getElementById('cl-loc').style.display='flex'}
+    if(p.blog){const el=document.getElementById('b-blog');el.textContent='🔗 '+p.blog;el.style.display='';document.getElementById('cl-blog-v').textContent=p.blog;document.getElementById('cl-blog').style.display='flex'}
+
+    // Avatar
+    const img=document.getElementById('av-img');
+    img.onload=()=>{img.style.display='block';document.getElementById('av-init').style.display='none'};
+    img.src=p.avatar_url;
+
+    // Missions
+    const grid=document.getElementById('mgrid');
+    const list=Array.isArray(repos)?repos.filter(r=>!r.fork).slice(0,9):[];
+    if(list.length){
+      grid.innerHTML=list.map((r,i)=>{
+        const lc=LANG_COLORS[r.language]||'#888';
+        const desc=(r.description||'No mission briefing on file.').substring(0,95);
+        const id=String(i+1).padStart(3,'0');
+        const topics=(r.topics&&r.topics.length?r.topics:r.language?[r.language]:[]).slice(0,3);
+        const upd=new Date(r.updated_at).toLocaleDateString('en-US',{month:'short',year:'numeric'});
+        return `<a href="${r.html_url}" target="_blank" class="mc fi">
+          <div class="mid">MISSION #${id} &nbsp;//&nbsp; ${upd}</div>
+          <div class="mname">${r.name}</div>
+          <div class="mdesc">${desc}${r.description&&r.description.length>95?'…':''}</div>
+          <div class="mtags">${topics.map(t=>`<span class="mtag">${t}</span>`).join('')}</div>
+          <div class="mfoot">
+            <span>★ ${r.stargazers_count}</span>
+            <span>⑂ ${r.forks_count}</span>
+            ${r.language?`<span class="mlang"><span class="ldot" style="background:${lc}"></span>${r.language}</span>`:''}
+          </div>
+        </a>`;
+      }).join('');
+
+      // Detect languages for skills
+      const langs=[...new Set(list.map(r=>r.language).filter(Boolean))];
+      if(langs.length>=2){
+        const sk=document.getElementById('sgrid');
+        const cards=langs.slice(0,7).map(l=>`<div class="skcard"><div class="skico">${LANG_ICO[l]||'🔧'}</div><div class="skn">${l}</div><div class="skcat">LANG</div></div>`);
+        cards.push('<div class="skcard"><div class="skico">🐙</div><div class="skn">Git</div><div class="skcat">TOOLS</div></div>');
+        sk.innerHTML=cards.join('');
+      }
+
+    } else {
+      const al=document.getElementById('m-alert');
+      al.textContent='MISSION FILES CLASSIFIED — visit github.com/jazbengu for full briefing.';
+      al.classList.add('show');
+      grid.innerHTML='';
+    }
+
+    setTimeout(observe,120);
+  } catch(e){
+    document.getElementById('mgrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted);font-family:monospace;font-size:.78rem">NETWORK OFFLINE — view missions at github.com/jazbengu</div>';
+  }
+}
+loadGH();
+</script>
+</body>
+</html>
